@@ -1,11 +1,16 @@
 import React from "react";
-
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../Share/firebase.init";
+import Loading from "../../../Share/Loading";
 const ModalCard = ({ treatment, date }) => {
+    const [user, loading] = useAuthState(auth);
     const { name, slots } = treatment;
     const handleSubmit = e => {
         e.preventDefault();
-        // console.log(e);
     };
+    if (loading) {
+        <Loading />;
+    }
     return (
         <div>
             <input
@@ -43,12 +48,16 @@ const ModalCard = ({ treatment, date }) => {
                             type="text"
                             name="name"
                             placeholder="Your Name"
+                            value={user?.displayName || ""}
+                            disabled
                             className="input input-bordered input-accent w-full"
                         />
                         <input
                             type="email"
                             placeholder="Email"
                             name="email"
+                            value={user?.email || ""}
+                            disabled
                             className="input input-bordered input-accent w-full"
                         />
                         <input

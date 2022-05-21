@@ -1,6 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "./firebase.init";
+import { signOut } from "firebase/auth";
 const NavMenu = () => {
+    const [user] = useAuthState(auth);
+    console.log(user?.uid);
     return (
         <div className="bg-base-100 sticky top-0 z-50">
             <div className="container mx-auto">
@@ -72,7 +77,13 @@ const NavMenu = () => {
                                     <Link to="/contactUs">Contact Us</Link>
                                 </li>
                                 <li>
-                                    <Link to="/logIn">Login</Link>
+                                    {user?.uid ? (
+                                        <button onClick={() => signOut(auth)}>
+                                            Sign Out
+                                        </button>
+                                    ) : (
+                                        <Link to="/logIn">Login</Link>
+                                    )}
                                 </li>
                             </ul>
                         </div>
@@ -126,7 +137,13 @@ const NavMenu = () => {
                                 <Link to="/contactUs">Contact Us</Link>
                             </li>
                             <li>
-                                <Link to="/logIn">Login</Link>
+                                {user?.uid ? (
+                                    <button onClick={() => signOut(auth)}>
+                                        Sign Out
+                                    </button>
+                                ) : (
+                                    <Link to="/logIn">Login</Link>
+                                )}
                             </li>
                         </ul>
                     </div>
