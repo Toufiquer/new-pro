@@ -4,7 +4,7 @@ import Card from "./Card/Card";
 import Contact from "./Contact/Contact";
 import Exception from "./Exception/Exception";
 import MakeAppointment from "./Exception/MakeAppointment/MakeAppointment";
-import Footer from "./Footer";
+import Footer from "../../Share/Footer";
 import Hero from "./Hero";
 import Patients from "./Patients/Patients";
 import Services from "./Services/Services";
