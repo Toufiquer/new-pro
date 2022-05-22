@@ -4,13 +4,31 @@ import auth from "../../../Share/firebase.init";
 import Loading from "../../../Share/Loading";
 const ModalCard = ({ treatment, date }) => {
     const [user, loading] = useAuthState(auth);
-    const { name, slots } = treatment;
-    const handleSubmit = e => {
-        e.preventDefault();
-    };
+    const { name, slots, _id } = treatment;
     if (loading) {
         <Loading />;
     }
+    const handleSubmit = e => {
+        e.preventDefault();
+        const booking = {
+            treatmentId: _id,
+            treatment: name,
+            dte: date?.props?.children,
+            slot: e.target.slot.value,
+            patient: user.email,
+            patientName: user.displayName,
+            phone: e.target.phone.value,
+        };
+        fetch("http://localhost:3500/booking", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify(booking),
+        })
+            .then(res => res.json())
+            .then(data => console.log(data));
+    };
     return (
         <div>
             <input
