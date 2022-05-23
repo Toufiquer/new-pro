@@ -3,9 +3,10 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../Share/firebase.init";
 import Loading from "../../../Share/Loading";
 import { toast } from "react-toastify";
-const ModalCard = ({ treatment, date }) => {
+const ModalCard = ({ treatment, date, refetch }) => {
+    console.log(treatment);
     const [user, loading] = useAuthState(auth);
-    const { name, slots, _id } = treatment;
+    const { name, _id, available } = treatment;
     if (loading) {
         <Loading />;
     }
@@ -36,6 +37,7 @@ const ModalCard = ({ treatment, date }) => {
                 }
                 console.log(data);
             });
+        refetch();
     };
     return (
         <div>
@@ -64,9 +66,9 @@ const ModalCard = ({ treatment, date }) => {
                             name="slot"
                             className="select select-accent select-bordered w-full"
                         >
-                            {slots.length !== 0
-                                ? slots.map(slot => (
-                                      <option key={slot}>{slot}</option>
+                            {available.length !== 0
+                                ? available.map(avail => (
+                                      <option key={avail}>{avail}</option>
                                   ))
                                 : "Ops No Slots available."}
                         </select>

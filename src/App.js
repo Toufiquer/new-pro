@@ -13,6 +13,9 @@ import RequireAuth from "./component/Share/RequireAuth";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { QueryClient, QueryClientProvider } from "react-query";
+import Dashboard from "./component/page/Dashboard/Dashboard";
+import MyAppointment from "./component/page/Dashboard/MyAppointment";
+import MyReview from "./component/page/Dashboard/MyReview";
 const queryClient = new QueryClient();
 function App() {
     return (
@@ -22,6 +25,23 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />}></Route>
                     <Route path="/about" element={<About />}></Route>
+                    <Route
+                        path="/dashboard"
+                        element={
+                            <RequireAuth>
+                                <Dashboard></Dashboard>
+                            </RequireAuth>
+                        }
+                    >
+                        <Route
+                            index
+                            element={<MyAppointment></MyAppointment>}
+                        ></Route>
+                        <Route
+                            path="myReview"
+                            element={<MyReview></MyReview>}
+                        ></Route>
+                    </Route>
                     <Route
                         path="/appointment"
                         element={

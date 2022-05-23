@@ -5,7 +5,7 @@ import auth from "./firebase.init";
 import { signOut } from "firebase/auth";
 const NavMenu = () => {
     const [user] = useAuthState(auth);
-    console.log(user?.uid);
+    // console.log(user?.uid);
     return (
         <div className="bg-base-100 sticky top-0 z-50">
             <div className="container mx-auto">
@@ -76,6 +76,11 @@ const NavMenu = () => {
                                 <li>
                                     <Link to="/contactUs">Contact Us</Link>
                                 </li>
+                                {user?.uid && (
+                                    <li>
+                                        <Link to="/dashboard">Dashboard</Link>
+                                    </li>
+                                )}
                                 <li>
                                     {user?.uid ? (
                                         <button onClick={() => signOut(auth)}>
@@ -136,6 +141,11 @@ const NavMenu = () => {
                             <li>
                                 <Link to="/contactUs">Contact Us</Link>
                             </li>
+                            {user?.uid && (
+                                <li>
+                                    <Link to="/dashboard">Dashboard</Link>
+                                </li>
+                            )}
                             <li>
                                 {user?.uid ? (
                                     <button onClick={() => signOut(auth)}>
