@@ -2,6 +2,7 @@ import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../Share/firebase.init";
 import Loading from "../../../Share/Loading";
+import { toast } from "react-toastify";
 const ModalCard = ({ treatment, date }) => {
     const [user, loading] = useAuthState(auth);
     const { name, slots, _id } = treatment;
@@ -13,7 +14,7 @@ const ModalCard = ({ treatment, date }) => {
         const booking = {
             treatmentId: _id,
             treatment: name,
-            dte: date?.props?.children,
+            date: date?.props?.children[0],
             slot: e.target.slot.value,
             patient: user.email,
             patientName: user.displayName,
@@ -27,7 +28,14 @@ const ModalCard = ({ treatment, date }) => {
             body: JSON.stringify(booking),
         })
             .then(res => res.json())
-            .then(data => console.log(data));
+            .then(data => {
+                if (data.success) {
+                    toast("Confirm Appointment for", "date");
+                } else {
+                    toast.error("Ops! You have already an Appointment for ");
+                }
+                console.log(data);
+            });
     };
     return (
         <div>
