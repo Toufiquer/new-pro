@@ -28,7 +28,7 @@ const MyAppointment = () => {
                     <tbody>
                         {/* <!-- row 1 --> */}
                         {treatment.map((p, i) => (
-                            <tr className={i % 2 === 1 ? "active" : ""}>
+                            <tr key={i} className={i % 2 === 1 ? "active" : ""}>
                                 <th>{i + 1}</th>
                                 <td>{p.treatment}</td>
                                 <td>{p.date}</td>
