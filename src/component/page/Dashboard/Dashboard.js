@@ -49,6 +49,7 @@ const Dashboard = () => {
                     </div>
                     {/* <!-- Page content here --> */}
                     <div className="text-center-text-2xl my-4">Dash Board</div>
+
                     <Outlet />
                 </div>
                 <div className="drawer-side">
