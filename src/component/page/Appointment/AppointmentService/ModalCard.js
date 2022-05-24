@@ -4,6 +4,7 @@ import auth from "../../../Share/firebase.init";
 import Loading from "../../../Share/Loading";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { signOut } from "firebase/auth";
 const ModalCard = ({ treatment, date, refetch }) => {
     const navigate = useNavigate();
     const [user, loading] = useAuthState(auth);
@@ -32,6 +33,8 @@ const ModalCard = ({ treatment, date, refetch }) => {
         })
             .then(res => {
                 if (res.status === 401 || res.status === 403) {
+                    signOut(auth);
+                    localStorage.removeItem("access-token");
                     navigate("/");
                 }
                 return res.json();
