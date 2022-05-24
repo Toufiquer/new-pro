@@ -6,6 +6,10 @@ import { signOut } from "firebase/auth";
 const NavMenu = () => {
     const [user] = useAuthState(auth);
     // console.log(user?.uid);
+    const handleSignOut = () => {
+        localStorage.removeItem("access-token");
+        signOut(auth);
+    };
     return (
         <div className="bg-base-100 sticky top-0 z-50">
             <div className="container mx-auto">
@@ -83,7 +87,7 @@ const NavMenu = () => {
                                 )}
                                 <li>
                                     {user?.uid ? (
-                                        <button onClick={() => signOut(auth)}>
+                                        <button onClick={handleSignOut}>
                                             Sign Out
                                         </button>
                                     ) : (
@@ -148,7 +152,7 @@ const NavMenu = () => {
                             )}
                             <li>
                                 {user?.uid ? (
-                                    <button onClick={() => signOut(auth)}>
+                                    <button onClick={handleSignOut}>
                                         Sign Out
                                     </button>
                                 ) : (
