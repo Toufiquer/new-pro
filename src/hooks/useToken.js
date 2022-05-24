@@ -9,7 +9,7 @@ const useToken = user => {
             email: email,
             name: name,
         };
-        console.log(newUser);
+        // console.log(newUser);
         if (email && name) {
             fetch("http://localhost:3500/user", {
                 method: "PUT",

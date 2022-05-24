@@ -3,8 +3,9 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../Share/firebase.init";
 import Loading from "../../../Share/Loading";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 const ModalCard = ({ treatment, date, refetch }) => {
-    console.log(treatment);
+    const navigate = useNavigate();
     const [user, loading] = useAuthState(auth);
     const { name, _id, available } = treatment;
     if (loading) {
@@ -25,17 +26,23 @@ const ModalCard = ({ treatment, date, refetch }) => {
             method: "POST",
             headers: {
                 "content-type": "application/json",
+                authorization: `Bearer ${localStorage.getItem("access-token")}`,
             },
             body: JSON.stringify(booking),
         })
-            .then(res => res.json())
+            .then(res => {
+                if (res.status === 401 || res.status === 403) {
+                    navigate("/");
+                }
+                return res.json();
+            })
             .then(data => {
                 if (data.success) {
                     toast("Confirm Appointment for", "date");
                 } else {
                     toast.error("Ops! You have already an Appointment for ");
                 }
-                console.log(data);
+                // console.log(data);
             });
         refetch();
     };

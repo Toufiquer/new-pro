@@ -17,7 +17,7 @@ const LogIn = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
-    console.log(from);
+    // console.log(from);
     // --- -- -- -- -- -- -- - - - -  -  -  -  -   -    -
 
     // Use Form for design and validate
@@ -57,7 +57,7 @@ const LogIn = () => {
     // Handle Submit
     const onSubmit = e => {
         signInWithEmailAndPassword(e.email, e.password);
-        console.log(e.email, e.password);
+        // console.log(e.email, e.password);
     };
 
     // --- -- -- -- -- -- -- - - - -  -  -  -  -   -    -
