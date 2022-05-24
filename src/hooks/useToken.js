@@ -19,7 +19,10 @@ const useToken = user => {
                 body: JSON.stringify(newUser),
             })
                 .then(res => res.json())
-                .then(data => console.log(data));
+                .then(data => {
+                    SetToken(data.token);
+                    localStorage.setItem("access-token", data.token);
+                });
         }
     }, [user, email, name]);
     return [token];

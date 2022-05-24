@@ -8,9 +8,11 @@ import {
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import Loading from "../../Share/Loading";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import useToken from "../../../hooks/useToken";
 const SignUp = () => {
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
     const navigate = useNavigate();
     const [pass, SetPass] = useState("");
     const [conPass, SetConPass] = useState("");
@@ -36,7 +38,7 @@ const SignUp = () => {
         useCreateUserWithEmailAndPassword(auth);
 
     const [updateProfile, updating, uError] = useUpdateProfile(auth);
-    const [token] = useToken(user, gUser);
+    const [token] = useToken(user || gUser);
     // --- -- -- -- -- -- -- - - - -  -  -  -  -   -    -
     // Loading
     if (gLoading || loading || updating) {
@@ -47,9 +49,8 @@ const SignUp = () => {
         err = gError?.message || error?.message || uError?.message;
     }
     // After Log in
-    if (gUser || user) {
-        console.log(gUser || user);
-        // navigate("/appointment");
+    if (token) {
+        navigate(from, { replace: true });
     }
     // --- -- -- -- -- -- -- - - - -  -  -  -  -   -    -
 

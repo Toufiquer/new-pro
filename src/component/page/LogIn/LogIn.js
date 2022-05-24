@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import Loading from "../../Share/Loading";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
+import useToken from "../../../hooks/useToken";
 const LogIn = () => {
     const [uUser, uLoading] = useAuthState(auth);
     // Error
@@ -34,15 +35,14 @@ const LogIn = () => {
     const [signInWithEmailAndPassword, user, loading, error] =
         useSignInWithEmailAndPassword(auth);
     // --- -- -- -- -- -- -- - - - -  -  -  -  -   -    -
-
+    const [token] = useToken(user || gUser);
     useEffect(() => {
         // After Log in
-        if (uUser || gUser?.uid || user?.uid) {
-            console.log(gUser || user);
+        if (token) {
             navigate(from, { replace: true });
         }
         // --- -- -- -- -- -- -- - - - -  -  -  -  -   -    -
-    }, [gUser, uUser, user, from, navigate]);
+    }, [token, from, navigate]);
 
     // Loading
     if (uLoading || gLoading || loading) {
