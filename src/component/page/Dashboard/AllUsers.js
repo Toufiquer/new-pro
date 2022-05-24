@@ -17,14 +17,14 @@ const AllUsers = () => {
     }
     const handleDelete = email => {
         if (window.confirm("Are You sure?") === true) {
-            console.log("deleted");
+            // console.log("deleted");
             fetch(`http://localhost:3500/delete?email=${email}`, {
                 method: "DELETE",
             })
                 .then(res => res.json())
                 .then(data => {
                     toast.warning("Delete Successful");
-                    console.log(data);
+                    refetch();
                 });
         }
     };
@@ -37,12 +37,12 @@ const AllUsers = () => {
                 .then(data => {
                     toast.success("Update Successful");
                     refetch();
-                    console.log(data);
+                    // console.log(data);
                 });
         }
     };
     const mkClient = email => {
-        if (window.confirm("Are You sure to Make Admin?") === true) {
+        if (window.confirm("Are You sure to Make Client?") === true) {
             fetch(`http://localhost:3500/mkClient?email=${email}`, {
                 method: "PUT",
             })
@@ -50,7 +50,7 @@ const AllUsers = () => {
                 .then(data => {
                     toast.success("Update Successful");
                     refetch();
-                    console.log(data);
+                    // console.log(data);
                 });
         }
     };
@@ -83,7 +83,7 @@ const AllUsers = () => {
                                         <span
                                             className="btn flex items-center justify-center"
                                             onClick={() => {
-                                                if (p.role !== "Admin") {
+                                                if (p.role !== "admin") {
                                                     mkAdmin(p.email);
                                                 } else {
                                                     mkClient(p.email);

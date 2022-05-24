@@ -17,6 +17,7 @@ import Dashboard from "./component/page/Dashboard/Dashboard";
 import MyAppointment from "./component/page/Dashboard/MyAppointment";
 import MyReview from "./component/page/Dashboard/MyReview";
 import AllUsers from "./component/page/Dashboard/AllUsers";
+import RequireAdmin from "./component/Share/RequireAdmin";
 const queryClient = new QueryClient();
 function App() {
     return (
@@ -44,7 +45,11 @@ function App() {
                         ></Route>
                         <Route
                             path="allUsers"
-                            element={<AllUsers></AllUsers>}
+                            element={
+                                <RequireAdmin>
+                                    <AllUsers></AllUsers>
+                                </RequireAdmin>
+                            }
                         ></Route>
                     </Route>
                     <Route
