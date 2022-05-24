@@ -9,6 +9,7 @@ import {
 import { useForm } from "react-hook-form";
 import Loading from "../../Share/Loading";
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import useToken from "../../../hooks/useToken";
 const SignUp = () => {
     const navigate = useNavigate();
     const [pass, SetPass] = useState("");
@@ -35,6 +36,7 @@ const SignUp = () => {
         useCreateUserWithEmailAndPassword(auth);
 
     const [updateProfile, updating, uError] = useUpdateProfile(auth);
+    const [token] = useToken(user, gUser);
     // --- -- -- -- -- -- -- - - - -  -  -  -  -   -    -
     // Loading
     if (gLoading || loading || updating) {
@@ -47,6 +49,7 @@ const SignUp = () => {
     // After Log in
     if (gUser || user) {
         console.log(gUser || user);
+        // navigate("/appointment");
     }
     // --- -- -- -- -- -- -- - - - -  -  -  -  -   -    -
 
@@ -55,8 +58,6 @@ const SignUp = () => {
         await createUserWithEmailAndPassword(e.email, e.password);
         await updateProfile({ displayName: e.name });
         // alert("Updated profile");
-
-        navigate("/appointment");
     };
 
     // --- -- -- -- -- -- -- - - - -  -  -  -  -   -    -
@@ -141,8 +142,8 @@ const SignUp = () => {
                         {/* --- --- --- */}
                     </>
                     <>
-                    {/* Input Confirm Password */}
-                    {/* <input
+                        {/* Input Confirm Password */}
+                        {/* <input
                         type="password"
                         autoComplete="new-password"
                         {...register("conPassword", {
