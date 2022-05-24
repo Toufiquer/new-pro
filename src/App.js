@@ -16,6 +16,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import Dashboard from "./component/page/Dashboard/Dashboard";
 import MyAppointment from "./component/page/Dashboard/MyAppointment";
 import MyReview from "./component/page/Dashboard/MyReview";
+import AllUsers from "./component/page/Dashboard/AllUsers";
 const queryClient = new QueryClient();
 function App() {
     return (
@@ -40,6 +41,10 @@ function App() {
                         <Route
                             path="myReview"
                             element={<MyReview></MyReview>}
+                        ></Route>
+                        <Route
+                            path="allUsers"
+                            element={<AllUsers></AllUsers>}
                         ></Route>
                     </Route>
                     <Route
