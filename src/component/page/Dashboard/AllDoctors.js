@@ -1,9 +1,10 @@
 import React from "react";
+import AddDoctor from "./AddDoctor";
 
 const AllDoctors = () => {
     const addDoctor = doctorData => {};
     const addDoctorCard = () => {};
-    const handleSubmit = () => {};
+
     return (
         <div>
             <div className="text-2xl text-center">All Doctors</div>
@@ -18,56 +19,7 @@ const AllDoctors = () => {
                         Add a Doctor
                     </label>
                 </div>
-
-                <div>
-                    <input
-                        type="checkbox"
-                        id={`add-a-doctor`}
-                        className="modal-toggle"
-                    />
-                    <div className="modal">
-                        <div className="modal-box relative">
-                            <div className="text-center text-xl my-2 text-bold">
-                                Add a New Doctor
-                            </div>
-                            <label
-                                htmlFor={`add-a-doctor`}
-                                className="btn btn-sm btn-circle absolute right-2 top-2"
-                            >
-                                ✕
-                            </label>
-                            <form
-                                onSubmit={handleSubmit}
-                                className="gap-2 grid-cols-1 grid"
-                            >
-                                <input
-                                    type="text"
-                                    name="name"
-                                    placeholder="Your Name"
-                                    className="input input-bordered input-accent w-full"
-                                />
-                                <input
-                                    type="email"
-                                    placeholder="Email"
-                                    name="email"
-                                    className="input input-bordered input-accent w-full"
-                                />
-                                <input
-                                    type="text"
-                                    placeholder="Specialist"
-                                    name="specialist"
-                                    className="input input-bordered input-accent w-full"
-                                />
-                                <input
-                                    type="submit"
-                                    value="Add New Doctor"
-                                    className="w-full btn btn-primary"
-                                />
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
+                <AddDoctor />
                 {/*  */}
 
                 <div className="container mx-auto my-3">
@@ -90,7 +42,7 @@ const AllDoctors = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {/* <!-- row 1 --> */}
+                                {/* <!-- row 1 -->  */}
                                 {/* {treatment.map((p, i) => (
                                     <tr
                                         key={i}
