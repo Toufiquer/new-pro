@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
+import { toast } from "react-toastify";
 import Loading from "../../Share/Loading";
 const AddDoctor = () => {
+    const [loading, SetLoading] = useState(false);
     // Use Form for design and validate
     const {
         register,
         handleSubmit,
         watch,
+        reset,
         formState: { errors },
     } = useForm();
     // --- -- -- -- -- -- -- - - - -  -  -  -  -   -    -
@@ -18,12 +21,13 @@ const AddDoctor = () => {
     } = useQuery("doctorServices", () =>
         fetch(`http://localhost:3500/doctorService`).then(res => res.json())
     );
-    if (isLoading) {
+    if (isLoading || loading) {
         return <Loading />;
     }
     const img_API_key = `e52161006b3728387b2244bd65d42123`;
     const onSubmit = async e => {
         console.log(e);
+        SetLoading(true);
         const img = e.img[0];
         const formData = new FormData();
         formData.append("image", img);
@@ -40,7 +44,26 @@ const AddDoctor = () => {
                         img: imgUrl,
                     };
                     // Send to server
-                    console.log(doctor);
+                    fetch(`http://localhost:3500/addDoctor`, {
+                        method: "POST",
+                        headers: {
+                            "content-type": "application/json",
+                            authorization: `Bearer ${localStorage.getItem(
+                                "access-token"
+                            )}`,
+                        },
+                        body: JSON.stringify(doctor),
+                    })
+                        .then(res => res.json())
+                        .then(d => {
+                            SetLoading(false);
+                            if (d.insertedId) {
+                                toast("Add Successful");
+                                reset();
+                            } else {
+                                toast("Please try again.");
+                            }
+                        });
                 }
             })
             .catch(err => console.error(err));
