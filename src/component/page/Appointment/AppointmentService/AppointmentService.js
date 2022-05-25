@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ServiceCard from "./ServiceCard";
 import ModalCard from "./ModalCard";
 import { useQuery } from "react-query";

@@ -50,11 +50,18 @@ const Dashboard = () => {
                                     </Link>
                                 </li>
                                 {admin === true && (
-                                    <li>
-                                        <Link to="/dashboard/allUsers">
-                                            All Users
-                                        </Link>
-                                    </li>
+                                    <>
+                                        <li>
+                                            <Link to="/dashboard/allUsers">
+                                                All Users
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to="/dashboard/allDoctors">
+                                                All Doctors
+                                            </Link>
+                                        </li>
+                                    </>
                                 )}
                             </ul>
                         </div>
@@ -78,9 +85,18 @@ const Dashboard = () => {
                             <Link to="/dashboard/myReview">My Review</Link>
                         </li>
                         {admin === true && (
-                            <li>
-                                <Link to="/dashboard/allUsers">All Users</Link>
-                            </li>
+                            <>
+                                <li>
+                                    <Link to="/dashboard/allUsers">
+                                        All Users
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/dashboard/allDoctors">
+                                        All Doctors
+                                    </Link>
+                                </li>
+                            </>
                         )}
                     </ul>
                 </div>
