@@ -10,14 +10,17 @@ const MyAppointment = () => {
     const [user] = useAuthState(auth);
     useEffect(() => {
         if (user) {
-            fetch(`http://localhost:3500/dashboard?treatment=${user?.email}`, {
-                headers: {
-                    "content-type": "application/json",
-                    authorization: `Bearer ${localStorage.getItem(
-                        "access-token"
-                    )}`,
-                },
-            })
+            fetch(
+                `https://gentle-lowlands-70395.herokuapp.com/dashboard?treatment=${user?.email}`,
+                {
+                    headers: {
+                        "content-type": "application/json",
+                        authorization: `Bearer ${localStorage.getItem(
+                            "access-token"
+                        )}`,
+                    },
+                }
+            )
                 .then(res => {
                     if (res.status === 401 || res.status === 403) {
                         signOut(auth);

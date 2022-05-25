@@ -23,7 +23,7 @@ const ModalCard = ({ treatment, date, refetch }) => {
             patientName: user.displayName,
             phone: e.target.phone.value,
         };
-        fetch("http://localhost:3500/booking", {
+        fetch("https://gentle-lowlands-70395.herokuapp.com/booking", {
             method: "POST",
             headers: {
                 "content-type": "application/json",

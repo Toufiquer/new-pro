@@ -13,12 +13,17 @@ const AllUsers = () => {
         isLoading,
         refetch,
     } = useQuery(["allUsers", email], () =>
-        fetch(`http://localhost:3500/allUsers?email=${email}`, {
-            headers: {
-                "content-type": "application/json",
-                authorization: `Bearer ${localStorage.getItem("access-token")}`,
-            },
-        }).then(res => res.json())
+        fetch(
+            `https://gentle-lowlands-70395.herokuapp.com/allUsers?email=${email}`,
+            {
+                headers: {
+                    "content-type": "application/json",
+                    authorization: `Bearer ${localStorage.getItem(
+                        "access-token"
+                    )}`,
+                },
+            }
+        ).then(res => res.json())
     );
     if (isLoading) {
         <Loading />;
@@ -26,9 +31,12 @@ const AllUsers = () => {
     const handleDelete = email => {
         if (window.confirm("Are You sure?") === true) {
             // console.log("deleted");
-            fetch(`http://localhost:3500/delete?email=${email}`, {
-                method: "DELETE",
-            })
+            fetch(
+                `https://gentle-lowlands-70395.herokuapp.com/delete?email=${email}`,
+                {
+                    method: "DELETE",
+                }
+            )
                 .then(res => res.json())
                 .then(data => {
                     toast.warning("Delete Successful");
@@ -38,9 +46,12 @@ const AllUsers = () => {
     };
     const mkAdmin = email => {
         if (window.confirm("Are You sure to Make Admin?") === true) {
-            fetch(`http://localhost:3500/mkAdmin?email=${email}`, {
-                method: "PUT",
-            })
+            fetch(
+                `https://gentle-lowlands-70395.herokuapp.com/mkAdmin?email=${email}`,
+                {
+                    method: "PUT",
+                }
+            )
                 .then(res => res.json())
                 .then(data => {
                     toast.success("Update Successful");
@@ -51,9 +62,12 @@ const AllUsers = () => {
     };
     const mkClient = email => {
         if (window.confirm("Are You sure to Make Client?") === true) {
-            fetch(`http://localhost:3500/mkClient?email=${email}`, {
-                method: "PUT",
-            })
+            fetch(
+                `https://gentle-lowlands-70395.herokuapp.com/mkClient?email=${email}`,
+                {
+                    method: "PUT",
+                }
+            )
                 .then(res => res.json())
                 .then(data => {
                     toast.success("Update Successful");

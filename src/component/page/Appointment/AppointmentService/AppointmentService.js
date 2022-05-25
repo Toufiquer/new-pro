@@ -12,9 +12,9 @@ const AppointmentService = ({ footerDate }) => {
         isLoading,
         refetch,
     } = useQuery(["available", date], () =>
-        fetch(`http://localhost:3500/available?date=${date}`).then(res =>
-            res.json()
-        )
+        fetch(
+            `https://gentle-lowlands-70395.herokuapp.com/available?date=${date}`
+        ).then(res => res.json())
     );
     if (isLoading) {
         return <Loading />;
@@ -22,7 +22,7 @@ const AppointmentService = ({ footerDate }) => {
 
     // console.log(date);
     // useEffect(() => {
-    //     fetch(`http://localhost:3500/available?date=${date}`)
+    //     fetch(`https://gentle-lowlands-70395.herokuapp.com/available?date=${date}`)
     //         .then(res => res.json())
     //         .then(data => SetAvailableAppointment(data));
     // }, [date]);

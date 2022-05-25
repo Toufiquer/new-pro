@@ -6,13 +6,16 @@ const useAdmin = user => {
     const [adminLoading, SetAdminLoading] = useState("true");
     useEffect(() => {
         if (email) {
-            fetch(`http://localhost:3500/user?email=${email}`, {
-                headers: {
-                    authorization: `Bearer ${localStorage.getItem(
-                        "access-token"
-                    )}`,
-                },
-            })
+            fetch(
+                `https://gentle-lowlands-70395.herokuapp.com/user?email=${email}`,
+                {
+                    headers: {
+                        authorization: `Bearer ${localStorage.getItem(
+                            "access-token"
+                        )}`,
+                    },
+                }
+            )
                 .then(res => {
                     if (res.status === 401 || res.status === 403) {
                         return console.log("admin : ", admin);

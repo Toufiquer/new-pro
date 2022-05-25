@@ -11,7 +11,7 @@ const useToken = user => {
         };
         // console.log(newUser);
         if (email && name) {
-            fetch("http://localhost:3500/user", {
+            fetch("https://gentle-lowlands-70395.herokuapp.com/user", {
                 method: "PUT",
                 headers: {
                     "content-type": "application/json",
