@@ -60,6 +60,7 @@ const AddDoctor = () => {
                             if (d.insertedId) {
                                 toast("Add Successful");
                                 reset();
+                                refetch();
                             } else {
                                 toast("Please try again.");
                             }
