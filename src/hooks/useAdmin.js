@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
 
 const useAdmin = user => {
     const email = user?.email;
@@ -16,7 +15,7 @@ const useAdmin = user => {
             })
                 .then(res => {
                     if (res.status === 401 || res.status === 403) {
-                        return toast("Ops You are Not admin");
+                        return console.log("admin : ", admin);
                     } else {
                         return res.json();
                     }

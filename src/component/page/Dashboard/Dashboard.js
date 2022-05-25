@@ -1,6 +1,11 @@
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, Outlet } from "react-router-dom";
+import useAdmin from "../../../hooks/useAdmin";
+import auth from "../../Share/firebase.init";
 const Dashboard = () => {
+    const [user] = useAuthState(auth);
+    const [admin] = useAdmin(user);
     return (
         <div>
             <div className="drawer">
@@ -44,11 +49,13 @@ const Dashboard = () => {
                                         My Review
                                     </Link>
                                 </li>
-                                <li>
-                                    <Link to="/dashboard/allUsers">
-                                        All Users
-                                    </Link>
-                                </li>
+                                {admin === true && (
+                                    <li>
+                                        <Link to="/dashboard/allUsers">
+                                            All Users
+                                        </Link>
+                                    </li>
+                                )}
                             </ul>
                         </div>
                     </div>
@@ -70,9 +77,11 @@ const Dashboard = () => {
                         <li>
                             <Link to="/dashboard/myReview">My Review</Link>
                         </li>
-                        <li>
-                            <Link to="/dashboard/allUsers">All Users</Link>
-                        </li>
+                        {admin === true && (
+                            <li>
+                                <Link to="/dashboard/allUsers">All Users</Link>
+                            </li>
+                        )}
                     </ul>
                 </div>
             </div>

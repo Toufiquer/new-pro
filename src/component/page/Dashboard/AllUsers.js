@@ -3,14 +3,22 @@ import { useQuery } from "react-query";
 import Loading from "../../Share/Loading";
 
 import { toast } from "react-toastify";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../Share/firebase.init";
 const AllUsers = () => {
-    // const {data,isLoading,refetch} = useQuery(['available'])
+    const [user] = useAuthState(auth);
+    const email = user?.email;
     const {
         data: allUsers,
         isLoading,
         refetch,
-    } = useQuery(["allUsers"], () =>
-        fetch(`http://localhost:3500/allUsers`).then(res => res.json())
+    } = useQuery(["allUsers", email], () =>
+        fetch(`http://localhost:3500/allUsers?email=${email}`, {
+            headers: {
+                "content-type": "application/json",
+                authorization: `Bearer ${localStorage.getItem("access-token")}`,
+            },
+        }).then(res => res.json())
     );
     if (isLoading) {
         <Loading />;
